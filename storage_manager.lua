@@ -63,10 +63,12 @@ function getUserHomes(PlayerName)
     local stmt = DB:prepare[[
         SELECT homename FROM 'homes' WHERE playername = ?
     ]]
-    stmt:bind_values(PlayerName)
     local homes = {}
-    for homename in stmt:urows() do
-        table.insert(homes, homename)
+    if stmt ~= nil then
+        stmt:bind_values(PlayerName)
+        for homename in stmt:urows() do
+            homes[#homes + 1] = homename
+        end
     end
     return homes
 end

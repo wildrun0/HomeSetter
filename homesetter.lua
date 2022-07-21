@@ -18,14 +18,14 @@ end
 
 function TpHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("The home name is too long")
+		Player:SendMessageFailure("@cThe home name is too long")
 		return true
 	end
     local homename = (#command ~= 2 and "home" or command[2])
 	if TpPlayerHome(Player, homename) then
-		Player:SendMessageSuccess("Teleported to @d" .. homename)
+		Player:SendMessageSuccess("@aTeleported to @d" .. homename)
 	else
-		Player:SendMessageFailure("Home '" .. homename .. "' not found!")
+		Player:SendMessageFailure("@cHome not found!")
 	end
 	return true
 end
@@ -33,7 +33,7 @@ end
 
 function SetHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("The home name is too long")
+		Player:SendMessageFailure("@cThe home name is too long")
 		return true
 	end
 
@@ -44,11 +44,11 @@ function SetHome(command, Player)
 	)
 	
 	if sethome_state == nil then
-		Player:SendMessageFailure("Maximum homes have been set!")
-	elseif sethome_state == true then
+		Player:SendMessageFailure("@cMaximum homes have been set!")
+	elseif sethome_state then
 		Player:SendMessageSuccess("@aHome set!")
 	else
-		Player:SendMessageFailure("Home already exist!")
+		Player:SendMessageFailure("@cHome already exist!")
 	end
 	return true
 end
@@ -56,27 +56,29 @@ end
 
 function DelHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("The home name is too long")
+		Player:SendMessageFailure("@cThe home name is too long")
 		return true
 	end
 	local homename = (#command ~= 2 and "home" or command[2])
 	if DelPlayerHome(Player:GetName(), homename) then
-		Player:SendMessageSuccess("Home deleted!")
+		Player:SendMessageSuccess("@aHome deleted!")
 	else
-		Player:SendMessageFailure("Home not found!")
+		Player:SendMessageFailure("@cHome not found!")
 	end
 	return true
 end
 
 
 function ViewHomes(_, Player)
-	local homes, homesCounter = ListOfHomes(Player:GetName())
-	local phrase = string.format("Your homes(%d): %s", homesCounter, homes)
-	Player:SendMessage(phrase)
+	local homes = getUserHomes(Player:GetName())
+	Player:SendMessage(
+		string.format("Your homes(%d): %s", #homes, table.concat(homes, ', '))
+	)
 	return true
 end
 
 
 function OnDisable()
+	LOG("Bye! :)")
 	DB:close()
 end

@@ -11,7 +11,7 @@ g_PluginInfo =
         },
         {
             Title = "Check your homes list",
-            Contents = "Use /homes to see existing homes and amount",
+            Contents = "Use /homes to see existing homes and their amount",
         },
     },
 	Commands =
