@@ -4,7 +4,7 @@ This plugin provides the ability to manage your homes
 With this plugin, you can set home points and adjust the maximum number of them through permissions. You can teleport to homes through all dismensions!
 
 # Check your homes list
-Use /homes to see existing homes and amount
+Use /homes to see existing homes and their amount
 
 # Commands
 

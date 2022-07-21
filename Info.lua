@@ -24,7 +24,7 @@ g_PluginInfo =
             ParameterCombinations =
             {
                 {
-                    Params = "*home*",
+                    Params = "[home]",
                     Help = "Name of the home to teleport to",
                 }
             },
@@ -37,7 +37,7 @@ g_PluginInfo =
             ParameterCombinations =
             {
                 {
-                    Params = "*home*",
+                    Params = "[home]",
                     Help = "Name of the home that should be set",
                 }
             },
@@ -50,7 +50,7 @@ g_PluginInfo =
             ParameterCombinations =
             {
                 {
-                    Params = "*home*",
+                    Params = "[home]",
                     Help = "Name of the home that should be deleted",
                 }
             },

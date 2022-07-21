@@ -8,15 +8,15 @@ local function checkPerms(Player)
     local PlayerGroup = cRankManager:GetPlayerRankName(PlayerUUID)
     local PlayerPermissions = cRankManager:GetRankPermissions(PlayerGroup)
 
-    for _, perm in pairs(PlayerPermissions) do
-        if perm == "*" then
+    for i = 1, #PlayerPermissions do
+        if PlayerPermissions[i] == "*" then
             max_value = 1e309 -- let's consider it as infinity :)
-        elseif string.find(perm, "homesetter.maxhomes.") then
-            local amount = string.sub(perm, -1)
+        elseif string.find(PlayerPermissions[i], "homesetter.maxhomes.") then
+            local amount = string.sub(PlayerPermissions[i], -1)
             if amount == "*" then
                 max_value = 1e309
             else
-                max_value = tonumber(string.sub(perm, -1))
+                max_value = tonumber(amount)
             end
             break
         end
@@ -69,19 +69,15 @@ end
 function SetPermissions()
     local default_rank_name = "Default"
     local default_group = cRankManager:GetGroupPermissions(default_rank_name)
-    local perm_found = false
-    for _, perm in pairs(default_group) do
-        if string.find(perm, "homesetter.") then
-            perm_found = true
-            break
+    for i = 1, #default_group do
+        if string.find(default_group[i], "homesetter.") then
+            return
         end
     end
-    if not perm_found then
-        cRankManager:AddPermissionToGroup("homesetter.maxhomes.3",  default_rank_name)
-        cRankManager:AddPermissionToGroup("homesetter.home",        default_rank_name)
-        cRankManager:AddPermissionToGroup("homesetter.homes",       default_rank_name)
-        cRankManager:AddPermissionToGroup("homesetter.sethome",     default_rank_name)
-        cRankManager:AddPermissionToGroup("homesetter.delhome",     default_rank_name)
-        LOG("Default permissions set!")
-    end
+    cRankManager:AddPermissionToGroup("homesetter.maxhomes.3",  default_rank_name)
+    cRankManager:AddPermissionToGroup("homesetter.home",        default_rank_name)
+    cRankManager:AddPermissionToGroup("homesetter.homes",       default_rank_name)
+    cRankManager:AddPermissionToGroup("homesetter.sethome",     default_rank_name)
+    cRankManager:AddPermissionToGroup("homesetter.delhome",     default_rank_name)
+    LOG("Default permissions set!")
 end

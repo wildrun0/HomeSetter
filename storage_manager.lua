@@ -17,7 +17,7 @@ function doesExist(name, homename)
         ]]
         stmt:bind_values(homename, name)
         for count in stmt:urows() do
-            return (count > 0 and true or false)
+            return (count > 0)
         end
     end
 end
