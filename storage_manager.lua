@@ -1,5 +1,5 @@
 DB = sqlite3.open(cPluginManager:Get():GetCurrentPlugin():GetLocalFolder() .. "/data.sqlite")
-DB_TABLE_EXIST = false
+local DB_TABLE_EXIST = false
 
 
 function doesExist(name, homename)
@@ -23,7 +23,10 @@ function doesExist(name, homename)
 end
 
 
-function saveHome(PlayerName, PlayerWorldName, HomeName, Coords)
+function saveHome(Player, HomeName, Coords)
+    local PlayerName = Player:GetName()
+    local PlayerWorldName = Player:GetWorld():GetName()
+
     local stmt = DB:prepare[[
         INSERT INTO homes VALUES(?, ?, ?, ?);
     ]]

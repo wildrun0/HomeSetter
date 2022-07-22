@@ -4,8 +4,8 @@ local croot = cRoot:Get()
 local function checkPerms(Player)
     local max_value = 3
 
-    local PlayerUUID = Player:GetUUID()
-    local PlayerGroup = cRankManager:GetPlayerRankName(PlayerUUID)
+    local PlayerHomes = #getUserHomes(Player:GetName())
+    local PlayerGroup = cRankManager:GetPlayerRankName(Player:GetUUID())
     local PlayerPermissions = cRankManager:GetRankPermissions(PlayerGroup)
 
     for i = 1, #PlayerPermissions do
@@ -16,14 +16,12 @@ local function checkPerms(Player)
             if amount == "*" then
                 max_value = 1e309
             else
-                max_value = tonumber(amount)
+                max_value = math.tointeger(amount)
             end
             break
         end
     end
-
-    local player_homes = #getUserHomes(Player:GetName())
-    return (player_homes < max_value)
+    return (PlayerHomes < max_value)
 end
 
 
@@ -34,7 +32,7 @@ function SetPlayerHome(Player, HomeName, pos)
     if doesExist(Player:GetName(), HomeName) then
         return false
     else
-        saveHome(Player:GetName(), Player:GetWorld():GetName(), HomeName, pos)
+        saveHome(Player, HomeName, pos)
         return true
     end
 end
