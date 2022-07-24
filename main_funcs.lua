@@ -1,36 +1,23 @@
 local croot = cRoot:Get()
 
 
-function cRankManager:GetRankOfPlayer(uuid)
-    local rank = cRankManager:GetPlayerRankName(uuid);
-    if (rank ~= "") then
-        return rank;
-    end
-    return cRankManager:GetDefaultRank();
-end
-
-
 local function checkPerms(Player)
-    local max_value = 3
-
     local PlayerHomes = #getUserHomes(Player:GetName())
-    local PlayerGroup = cRankManager:GetRankOfPlayer(Player:GetUUID())
-    local PlayerPermissions = cRankManager:GetRankPermissions(PlayerGroup)
+    local PlayerPermissions = Player:GetPermissions()
 
     for i = 1, #PlayerPermissions do
         if PlayerPermissions[i] == "*" then
-            max_value = 1e309 -- let's consider it as infinity :)
+            return true
         elseif string.find(PlayerPermissions[i], "homesetter.maxhomes.") then
             local amount = string.sub(PlayerPermissions[i], -1)
             if amount == "*" then
-                max_value = 1e309
+                return true
             else
-                max_value = math.tointeger(amount)
+                return (PlayerHomes < tonumber(amount))
             end
-            break
         end
     end
-    return (PlayerHomes < max_value)
+    return (PlayerHomes < 3) -- default maximum (if permission was deleted/not found)
 end
 
 
