@@ -1,11 +1,20 @@
 local croot = cRoot:Get()
 
 
+function cRankManager:GetRankOfPlayer(uuid)
+    local rank = cRankManager:GetPlayerRankName(uuid);
+    if (rank ~= "") then
+        return rank;
+    end
+    return cRankManager:GetDefaultRank();
+end
+
+
 local function checkPerms(Player)
     local max_value = 3
 
     local PlayerHomes = #getUserHomes(Player:GetName())
-    local PlayerGroup = cRankManager:GetPlayerRankName(Player:GetUUID())
+    local PlayerGroup = cRankManager:GetRankOfPlayer(Player:GetUUID())
     local PlayerPermissions = cRankManager:GetRankPermissions(PlayerGroup)
 
     for i = 1, #PlayerPermissions do
