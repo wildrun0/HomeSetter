@@ -1,10 +1,6 @@
-PLUGIN = nil
-
-
 function Initialize(Plugin)
-	PLUGIN = Plugin
 	Plugin:SetName("HomeSetter")
-	Plugin:SetVersion(1)
+	Plugin:SetVersion(2)
 
 	dofile(cPluginManager:GetPluginsPath() .. "/InfoReg.lua")
 	RegisterPluginInfoCommands()

@@ -6,6 +6,10 @@ g_PluginInfo =
 	AdditionalInfo =
     {
         {
+            Title = "Lightweight & Fast",
+            Contents = "The entire plugin fits on ~10KiB of disk space & has no unnecessary functionality.",
+        },
+        {
             Title = "Set your homes",
             Contents = "With this plugin, you can set home points and adjust the maximum number of them through permissions. You can teleport to homes through all dismensions!",
         },
