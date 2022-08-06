@@ -72,27 +72,27 @@ g_PluginInfo =
         ["homesetter.home"] =
         {
             Description = "Allows the players to teleport to their homes.",
-            RecommendedGroups = "players",
+            RecommendedGroups = "Default",
         },
         ["homesetter.sethome"] =
         {
             Description = "Allows the players to set their homes.",
-            RecommendedGroups = "players",
+            RecommendedGroups = "Default",
         },
         ["homesetter.delhome"] =
         {
             Description = "Allows the players to delete their homes.",
-            RecommendedGroups = "players",
+            RecommendedGroups = "Default",
         },
         ["homesetter.homes"] =
         {
             Description = "Allows the players to view a list of their homes.",
-            RecommendedGroups = "players",
+            RecommendedGroups = "Default",
         },
         ["homesetter.maxhomes.3"] =
         {
             Description = "Maximum number of homes to be set",
-            RecommendedGroups = "players",
+            RecommendedGroups = "Default",
         },
     },
 	Categories = {},

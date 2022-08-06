@@ -1,4 +1,5 @@
 local croot = cRoot:Get()
+local strfind = string.find
 
 
 local function checkPerms(Player)
@@ -6,10 +7,11 @@ local function checkPerms(Player)
     local PlayerPermissions = Player:GetPermissions()
 
     for i = 1, #PlayerPermissions do
-        if PlayerPermissions[i] == "*" then
+        local PlayerPerm = PlayerPermissions[i]
+        if PlayerPerm == "*" then
             return true
-        elseif string.find(PlayerPermissions[i], "homesetter.maxhomes.") then
-            local amount = string.sub(PlayerPermissions[i], -1)
+        elseif strfind(PlayerPerm, "homesetter.maxhomes.") then
+            local amount = string.sub(PlayerPerm, -1)
             if amount == "*" then
                 return true
             else
@@ -48,10 +50,11 @@ function TpPlayerHome(Player, HomeName)
     if doesExist(PlayerName, HomeName) then
         local world, x, y, z  = getHomePos(PlayerName, HomeName)
         if world ~= Player:GetWorld():GetName() then
-            local cworld = croot:GetWorld(world)
-            local VectorCoords = Vector3d(x, y, z)
-            Player:MoveToWorld(cworld, true, VectorCoords)
+            Player:MoveToWorld(
+                croot:GetWorld(world), true, Vector3d(x, y, z)
+            )
         else
+            Player:SetInvulnerableTicks(2) -- to prevent getting damage because of "fall" (cuberite bug)
             Player:TeleportToCoords(x, y, z)
         end
         return true
@@ -64,7 +67,7 @@ function SetPermissions()
     local default_rank_name = "Default"
     local default_group = cRankManager:GetGroupPermissions(default_rank_name)
     for i = 1, #default_group do
-        if string.find(default_group[i], "homesetter.") then
+        if strfind(default_group[i], "homesetter.") then
             return
         end
     end

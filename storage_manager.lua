@@ -1,5 +1,5 @@
-DB = sqlite3.open(cPluginManager:Get():GetCurrentPlugin():GetLocalFolder() .. "/data.sqlite")
 local DB_TABLE_EXIST = false
+DB = sqlite3.open(cPluginManager:Get():GetCurrentPlugin():GetLocalFolder() .. "/data.sqlite")
 
 
 function doesExist(name, homename)
@@ -17,7 +17,7 @@ function doesExist(name, homename)
         ]]
         stmt:bind_values(homename, name)
         for count in stmt:urows() do
-            return (count > 0)
+            return (count > 0)  -- i wish there was a more nicer way to do this
         end
     end
 end
@@ -69,8 +69,10 @@ function getUserHomes(PlayerName)
     local homes = {}
     if stmt ~= nil then
         stmt:bind_values(PlayerName)
+        local i = 1
         for homename in stmt:urows() do
-            homes[#homes + 1] = homename
+            homes[i] = homename
+            i = i + 1
         end
     end
     return homes

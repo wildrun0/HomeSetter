@@ -24,8 +24,8 @@ Use /homes to see existing homes and their amount
 # Permissions
 | Permissions | Description | Commands | Recommended groups |
 | ----------- | ----------- | -------- | ------------------ |
-| homesetter.delhome | Allows the players to delete their homes. | `/delhome` | players |
-| homesetter.home | Allows the players to teleport to their homes. | `/home` | players |
-| homesetter.homes | Allows the players to view a list of their homes. | `/homes` | players |
-| homesetter.maxhomes.3 | Maximum number of homes to be set |  | players |
-| homesetter.sethome | Allows the players to set their homes. | `/sethome` | players |
+| homesetter.delhome | Allows the players to delete their homes. | `/delhome` | Default |
+| homesetter.home | Allows the players to teleport to their homes. | `/home` | Default |
+| homesetter.homes | Allows the players to view a list of their homes. | `/homes` | Default |
+| homesetter.maxhomes.3 | Maximum number of homes to be set |  | Default |
+| homesetter.sethome | Allows the players to set their homes. | `/sethome` | Default |

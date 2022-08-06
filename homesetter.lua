@@ -1,6 +1,6 @@
 function Initialize(Plugin)
 	Plugin:SetName("HomeSetter")
-	Plugin:SetVersion(2)
+	Plugin:SetVersion(3)
 
 	dofile(cPluginManager:GetPluginsPath() .. "/InfoReg.lua")
 	RegisterPluginInfoCommands()
@@ -38,7 +38,7 @@ function SetHome(command, Player)
 	local sethome_state = SetPlayerHome(
 		Player, homename, cJson:Serialize(PlayerPos)
 	)
-	
+
 	if sethome_state == nil then
 		Player:SendMessageFailure("@cMaximum homes have been set!")
 	elseif sethome_state then
