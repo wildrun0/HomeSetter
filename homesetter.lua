@@ -1,6 +1,6 @@
 function Initialize(Plugin)
 	Plugin:SetName("HomeSetter")
-	Plugin:SetVersion(3)
+	Plugin:SetVersion(4)
 
 	dofile(cPluginManager:GetPluginsPath() .. "/InfoReg.lua")
 	RegisterPluginInfoCommands()
@@ -14,14 +14,14 @@ end
 
 function TpHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("@cThe home name is too long")
+		Player:SendMessageFailure("&cThe home name is too long")
 		return true
 	end
     local homename = (#command ~= 2 and "home" or command[2])
 	if TpPlayerHome(Player, homename) then
-		Player:SendMessageSuccess("@aTeleported to @d" .. homename)
+		Player:SendMessageSuccess("&aTeleported to &d" .. homename)
 	else
-		Player:SendMessageFailure("@cHome not found!")
+		Player:SendMessageFailure("&cHome not found!")
 	end
 	return true
 end
@@ -29,7 +29,7 @@ end
 
 function SetHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("@cThe home name is too long")
+		Player:SendMessageFailure("&cThe home name is too long")
 		return true
 	end
 
@@ -40,11 +40,11 @@ function SetHome(command, Player)
 	)
 
 	if sethome_state == nil then
-		Player:SendMessageFailure("@cMaximum homes have been set!")
+		Player:SendMessageFailure("&cMaximum homes have been set!")
 	elseif sethome_state then
-		Player:SendMessageSuccess("@aHome set!")
+		Player:SendMessageSuccess("&aHome set!")
 	else
-		Player:SendMessageFailure("@cHome already exist!")
+		Player:SendMessageFailure("&cHome already exist!")
 	end
 	return true
 end
@@ -52,14 +52,14 @@ end
 
 function DelHome(command, Player)
 	if #command > 2 then
-		Player:SendMessageFailure("@cThe home name is too long")
+		Player:SendMessageFailure("&cThe home name is too long")
 		return true
 	end
 	local homename = (#command ~= 2 and "home" or command[2])
 	if DelPlayerHome(Player:GetName(), homename) then
-		Player:SendMessageSuccess("@aHome deleted!")
+		Player:SendMessageSuccess("&aHome deleted!")
 	else
-		Player:SendMessageFailure("@cHome not found!")
+		Player:SendMessageFailure("&cHome not found!")
 	end
 	return true
 end
